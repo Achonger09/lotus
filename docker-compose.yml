@@ -1,0 +1,32 @@
+version: "3.5"
+services:
+  chatserver:
+    build:
+        context: . 
+        dockerfile: Dockerfile_server 
+    command: sh /src/ci/script/start_server.sh
+    ports:
+      - target: 20013  
+        published: 20013
+    networks:
+      - localnet
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /src
+  chatclient:
+    build:
+        context: .
+        dockerfile: Dockerfile_client
+    command: sh /src/ci/script/start_client.sh
+    networks:
+      - localnet
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /src
+networks:
+  localnet:
+
+volumes:
+  counter-vol:

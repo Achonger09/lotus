@@ -1,0 +1,7 @@
+FROM alpine
+LABEL maintainer="987456188@qq.com"
+
+RUN apk add --update python
+COPY . /src
+WORKDIR /src
+EXPOSE 20013
